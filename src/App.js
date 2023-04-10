@@ -4,6 +4,10 @@ import Params from './Params';
 
 function App() {
 const [sessionDuration, setSessionDuration] = useState(25)
+const [breakDuration , setBreakDuration] = useState(5)
+function updateCounter(event, target){
+  // if(target === 'sessio')
+}
 useEffect(()=>{
   setInterval(()=>{
 
@@ -15,8 +19,8 @@ useEffect(()=>{
       25 + 5 Clock
       </h1>
       <div className='app-params-container'>
-        <Params id="break-label" label="Break Length" counter={5}/>
-        <Params id="session-label" label="Session Length" counter={sessionDuration}/>
+        <Params id="break" label="Break Length" counter={breakDuration} updateCounter={setBreakDuration}/>
+        <Params id="session" label="Session Length" counter={sessionDuration} updateCounter={setSessionDuration}/>
       </div>
       
     </div>
