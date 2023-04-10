@@ -23,3 +23,13 @@ function Params({id, label, counter, updateCounter}){
     )
 }
 export default Params
+
+// const targetMinutes= 60
+// const targetMilliSec = new Date().getTime()+(targetMinutes*60*1000)
+// setInterval(()=>{
+//     const current = new Date().getTime()
+//     const distance = targetMilliSec - current 
+//     const minutes = Math.floor(distance/(1000*60))
+//     const sec = Math.floor(distance%(1000*60)/1000)
+//     // console.log(`${minutes}:${sec}`)
+// }, 1000)
