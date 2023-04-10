@@ -10,9 +10,9 @@ useEffect(()=>{
 },[])
   return (
     <div className="App">
-      <header className="App-header">
+      <h1 className="App-header">
       25 + 5 Clock
-      </header>
+      </h1>
     </div>
   );
 }
