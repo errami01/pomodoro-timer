@@ -17,8 +17,8 @@
   width: 50%;
   background-color: green;
 }
-.params-container{
-}
+/* .params-container{
+} */
 .app-params-container{
   display: flex;
   justify-content: space-between;
@@ -28,6 +28,11 @@
   display: flex;
   justify-content: center;
   /* background-color: red; */
-
+}
+.params-arrow{
+  font-weight: 900;
+}
+.params-counter{
+  margin: 0 15px;
 }
 

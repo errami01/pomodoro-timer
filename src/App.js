@@ -16,7 +16,7 @@ useEffect(()=>{
       </h1>
       <div className='app-params-container'>
         <Params id="break-label" label="Break Length" counter={5}/>
-        <Params id="break-label" label="Break Length" counter={5}/>
+        <Params id="session-label" label="Session Length" counter={5}/>
       </div>
       
     </div>

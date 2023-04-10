@@ -5,11 +5,11 @@ function Params({id, label, counter}){
             <h4 id={id} className="params-label" style={{margin:'0'}}>{label}</h4>
             <div className="arrows-container">
                 <span id="break-decrement">
-                    <i class="fa-solid fa-arrow-down"></i>
+                    <i className="fa-solid fa-arrow-down params-arrow"></i>
                 </span>
                 <span className="params-counter">{counter}</span>
                 <span id="break-increment">
-                <i class="fa-solid fa-arrow-up"></i>
+                <i className="fa-solid fa-arrow-up params-arrow"></i>
                 </span>
             </div>
            
