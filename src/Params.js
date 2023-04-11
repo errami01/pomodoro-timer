@@ -1,12 +1,38 @@
 
 function Params({id, label, counter, updateCounter, intervalId}){
     function handleClick(event){
-        if( id ==='session') clearInterval(intervalId)
+        clearInterval(intervalId)
         if(event.currentTarget.id === `${id}-decrement`  && counter >1) {
-
-            updateCounter(prev=> prev-1)
+            if(id === 'session'){
+                
+                updateCounter(prev=> ({
+                    ...prev,
+                    sessionLength: prev.sessionLength -1
+                }))
+            }
+            else{
+                updateCounter(prev=> ({
+                    ...prev,
+                    breakLength: prev.breakLength-1
+                }))
+            }
+            
         }
-        if(event.currentTarget.id === `${id}-increment` && counter <60) updateCounter(prev=> prev+1)
+        if(event.currentTarget.id === `${id}-increment` && counter <60){
+            if(id === 'session'){
+                clearInterval(intervalId)
+                updateCounter(prev=> ({
+                    ...prev,
+                    sessionLength: prev.sessionLength +1
+                }))
+            }
+            else{
+                updateCounter(prev=> ({
+                    ...prev,
+                    breakLength: prev.breakLength +1
+                }))
+            }
+        }
     }
     return(
         <div className="params-container">
