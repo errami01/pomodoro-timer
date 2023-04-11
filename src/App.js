@@ -8,32 +8,31 @@ const [breakDuration , setBreakDuration] = useState(5)
 const minutesElement = useRef()
 const secElement = useRef()
 const intervalId = useRef(null)
-const targetMilliSec = new Date().getTime()+(sessionDuration*60*1000)
-console.log(targetMilliSec)
-if(intervalId.current) clearInterval(intervalId.current)
-// function handleArrowClick(event, id, ){
-//   if(event.currentTarget.id === `${id}-decrement`  && counter >0) {
-//     clearInterval(intervalId)
-//     updateCounter(prev=> prev-1)
-//   }
-//   if(event.currentTarget.id === `${id}-increment` && counter <60) updateCounter(prev=> prev+1)
-// }
- intervalId.current = setInterval(()=>{
-  const current = new Date().getTime()
-  const distance = targetMilliSec - current 
-  if( distance <= 0) {
-    clearInterval(intervalId)
-    return
-  }
-  const minutes = Math.floor(distance/(1000*60))
-  const sec = Math.floor(distance%(1000*60)/1000)
-  minutesElement.current.innerHTML = minutes <10? `0${minutes}`: minutes
-  secElement.current.innerHTML = sec
-  
-},1000)
+const remainingTime = useRef(sessionDuration*60)
+
+
+// if(intervalId.current) clearInterval(intervalId.current)
 useEffect(()=>{
+  clearInterval(intervalId.current)
+  remainingTime.current = sessionDuration*60
+  intervalId.current = setInterval(()=>{
+    if( remainingTime.current <= 0) {
+      clearInterval(intervalId.current)
+      return
+    }
+      remainingTime.current = remainingTime.current -1
+      const minutes = Math.floor(remainingTime.current/60);
+      const sec = remainingTime.current%60
+    
   
+    minutesElement.current.innerHTML = minutes <10? `0${minutes}`: minutes
+    secElement.current.innerHTML = sec
+    
+  },1000)
 },[sessionDuration])
+
+ 
+
   return (
     <div className="App">
       <h1 className="App-header">
@@ -70,12 +69,3 @@ useEffect(()=>{
 
 export default App;
 
-// const target= 9
-// let remainingTime = target*60
-// setInterval(()=>{
-//     remainingTime --
-//     const minutes = Math.floor(remainingTime/60);
-//     const sec = remainingTime%60
-//     console.log(`${minutes}:${sec}`)
-//     // console.log(`${minutes}:${sec}`)
-// }, 1000)

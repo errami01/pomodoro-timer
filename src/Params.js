@@ -2,7 +2,8 @@
 function Params({id, label, counter, updateCounter, intervalId}){
     function handleClick(event){
         if( id ==='session') clearInterval(intervalId)
-        if(event.currentTarget.id === `${id}-decrement`  && counter >0) {
+        if(event.currentTarget.id === `${id}-decrement`  && counter >1) {
+
             updateCounter(prev=> prev-1)
         }
         if(event.currentTarget.id === `${id}-increment` && counter <60) updateCounter(prev=> prev+1)
