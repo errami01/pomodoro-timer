@@ -1,6 +1,7 @@
 
-function Params({id, label, counter, updateCounter}){
+function Params({id, label, counter, updateCounter, intervalId}){
     function handleClick(event){
+        if( id ==='session') clearInterval(intervalId)
         if(event.currentTarget.id === `${id}-decrement`  && counter >0) {
             updateCounter(prev=> prev-1)
         }
@@ -24,12 +25,3 @@ function Params({id, label, counter, updateCounter}){
 }
 export default Params
 
-// const targetMinutes= 60
-// const targetMilliSec = new Date().getTime()+(targetMinutes*60*1000)
-// setInterval(()=>{
-//     const current = new Date().getTime()
-//     const distance = targetMilliSec - current 
-//     const minutes = Math.floor(distance/(1000*60))
-//     const sec = Math.floor(distance%(1000*60)/1000)
-//     // console.log(`${minutes}:${sec}`)
-// }, 1000)
