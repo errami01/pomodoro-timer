@@ -32,7 +32,7 @@ useEffect(()=>{
     
   
     minutesElement.current.innerHTML = minutes <10? `0${minutes}`: minutes
-    secElement.current.innerHTML = sec
+    secElement.current.innerHTML = sec < 10 ? `0${sec}`:sec
     
   },1000)
 },[timer.turn==='session'? timer.sessionLength:timer.breakLength,timer.turn])
@@ -67,6 +67,13 @@ const displayedTimer = timer.turn === 'session'? timer.sessionLength<10? `0${tim
           <span className='minutes' ref={minutesElement}>{displayedTimer}</span>
           :
           <span className='seconds' ref={secElement}>{'00'}</span>
+          <div className='controle-panel'>
+           <button className='play-pause'>
+              <i class="fa fa-play fa-2x"></i>
+              <i class="fa fa-pause fa-2x"/>
+            </button>
+           <button className='rotate-btn'><i class="fa fa-refresh fa-2x"></i></button>
+          </div>
         </div>
       </div>
       
