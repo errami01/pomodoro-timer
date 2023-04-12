@@ -19,6 +19,13 @@ const displayedTimer = timer.turn === 'session'? timer.sessionLength<10? `0${tim
 function handlePlayPauseClick(){
   play.current = !play.current;
 }
+function handleResetClick(){
+  setTimer(prev=>({
+    ...prev,
+    sessionLength: DEFAULT_SESSION,
+    breakLength: DEFAULT_BREAK
+  }))
+}
 useEffect(()=>{
   clearInterval(intervalId.current)
   if(timer.turn === 'session') remainingTime.current = timer.sessionLength*60
@@ -75,7 +82,7 @@ useEffect(()=>{
               <i class="fa fa-play fa-2x"></i>
               <i class="fa fa-pause fa-2x"/>
             </button>
-           <button className='reset-btn'><i class="fa fa-refresh fa-2x"></i></button>
+           <button className='reset-btn' onClick={handleResetClick}><i class="fa fa-refresh fa-2x"></i></button>
           </div>
         </div>
       </div>
