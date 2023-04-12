@@ -1,11 +1,12 @@
 import './App.css';
 import { useState, useEffect, useRef} from 'react';
 import Params from './Params';
-
+const DEFAULT_SESSION = 1;
+const DEFAULT_BREAK = 1
 function App() {
 // const [sessionDuration, setSessionDuration] = useState(1)
 // const [breakDuration , setBreakDuration] = useState(5)
-const [timer, setTimer] = useState({turn: 'session', sessionLength: 1, breakLength: 1})
+const [timer, setTimer] = useState({turn: 'session', sessionLength: DEFAULT_SESSION, breakLength: DEFAULT_BREAK})
 const play = useRef(false)
 const minutesElement = useRef()
 const secElement = useRef()
@@ -74,7 +75,7 @@ useEffect(()=>{
               <i class="fa fa-play fa-2x"></i>
               <i class="fa fa-pause fa-2x"/>
             </button>
-           <button className='rotate-btn'><i class="fa fa-refresh fa-2x"></i></button>
+           <button className='reset-btn'><i class="fa fa-refresh fa-2x"></i></button>
           </div>
         </div>
       </div>
