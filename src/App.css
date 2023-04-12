@@ -35,8 +35,10 @@
 .params-counter{
   margin: 0 15px;
 }
-.play-pause{
+.play-pause, .rotate-btn{
   /* font-size: 2em; */
-  color: black;
+  color: inherit;
+  border: 0;
+  background-color: transparent;
 }
 
