@@ -6,19 +6,24 @@ function App() {
 // const [sessionDuration, setSessionDuration] = useState(1)
 // const [breakDuration , setBreakDuration] = useState(5)
 const [timer, setTimer] = useState({turn: 'session', sessionLength: 1, breakLength: 1})
+const play = useRef(false)
 const minutesElement = useRef()
 const secElement = useRef()
 const intervalId = useRef(null)
 const remainingTime = useRef(timer.sessionLength*60)
-
+const displayedTimer = timer.turn === 'session'? timer.sessionLength<10? `0${timer.sessionLength}`: timer.sessionLength
+                                                : timer.breakLength<10? `0${timer.breakLength}`:timer.breakLength
 
 // if(intervalId.current) clearInterval(intervalId.current)
+function handlePlayPauseClick(){
+  play.current = !play.current;
+}
 useEffect(()=>{
   clearInterval(intervalId.current)
   if(timer.turn === 'session') remainingTime.current = timer.sessionLength*60
   else remainingTime.current = timer.breakLength*60
   intervalId.current = setInterval(()=>{
-    if( remainingTime.current <= 0) {
+    if(play.current){if( remainingTime.current <= 0) {
       clearInterval(intervalId.current)
       setTimer(prev=>({
         ...prev,
@@ -29,15 +34,12 @@ useEffect(()=>{
   remainingTime.current = remainingTime.current -1
   const minutes = Math.floor(remainingTime.current/60);
   const sec = remainingTime.current%60
-    
-  
-    minutesElement.current.innerHTML = minutes <10? `0${minutes}`: minutes
-    secElement.current.innerHTML = sec < 10 ? `0${sec}`:sec
+  minutesElement.current.innerHTML = minutes <10? `0${minutes}`: minutes
+  secElement.current.innerHTML = sec < 10 ? `0${sec}`:sec}
     
   },1000)
 },[timer.turn==='session'? timer.sessionLength:timer.breakLength,timer.turn])
-const displayedTimer = timer.turn === 'session'? timer.sessionLength<10? `0${timer.sessionLength}`: timer.sessionLength
-                                                : timer.breakLength<10? `0${timer.breakLength}`:timer.breakLength
+
  
 
   return (
@@ -68,7 +70,7 @@ const displayedTimer = timer.turn === 'session'? timer.sessionLength<10? `0${tim
           :
           <span className='seconds' ref={secElement}>{'00'}</span>
           <div className='controle-panel'>
-           <button className='play-pause'>
+           <button className='play-pause' onClick={handlePlayPauseClick}>
               <i class="fa fa-play fa-2x"></i>
               <i class="fa fa-pause fa-2x"/>
             </button>
