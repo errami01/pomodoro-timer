@@ -18,12 +18,17 @@ const minutesElement = useRef()
 const secElement = useRef()
 const intervalId = useRef(null)
 const remainingTime = useRef(timer.sessionLength*60)
+const beep = useRef()
 const displayedTimer = timer.turn === 'session'? timer.sessionLength<10? `0${timer.sessionLength}`: timer.sessionLength
                                                 : timer.breakLength<10? `0${timer.breakLength}`:timer.breakLength
 // console.log(minutesElement.current.innerHTML)
 // if(intervalId.current) clearInterval(intervalId.current)
+// if(remainingTime <=0){
+//   beep.current.play()
+// }
 function handlePlayPauseClick(){
   // play.current = !play.current;
+  
   setTimer(prev=>({
     ...prev,
     play: !prev.play
@@ -41,10 +46,7 @@ function handleResetClick(){
   }))
 }
 useEffect(()=>{
-console.log("inside effect "+minutesElement.current.innerHTML)
-console.log("inside effect "+timer.play)
-
-  
+  // beep.current.play()
   if(timer.turn === 'session') {
     remainingTime.current = timer.sessionLength*60
     minutesElement.current.innerHTML = timer.sessionLength <10? `0${timer.sessionLength}`: timer.sessionLength
@@ -59,12 +61,13 @@ console.log("inside effect "+timer.play)
   intervalId.current = setInterval(()=>{
     if(timer.play){
       if( remainingTime.current <= 0) {
-      clearInterval(intervalId.current)
-      setTimer(prev=>({
-        ...prev,
-        turn: prev.turn==='session'? 'break':'session'
-      }))
-      return
+        beep.current.play()
+        clearInterval(intervalId.current)
+        setTimer(prev=>({
+          ...prev,
+          turn: prev.turn==='session'? 'break':'session'
+        }))
+        return
     }
   remainingTime.current = remainingTime.current -1
   const minutes = Math.floor(remainingTime.current/60);
@@ -82,12 +85,13 @@ useEffect(()=>{
       if(timer.play){
         // clearInterval(intervalId.current)
         if( remainingTime.current <= 0) {
-        clearInterval(intervalId.current)
-        setTimer(prev=>({
-          ...prev,
-          turn: prev.turn==='session'? 'break':'session'
-        }))
-        return
+          beep.current.play()
+          clearInterval(intervalId.current)
+          setTimer(prev=>({
+            ...prev,
+            turn: prev.turn==='session'? 'break':'session'
+          }))
+          return
       }
     remainingTime.current = remainingTime.current -1
     const minutes = Math.floor(remainingTime.current/60);
@@ -138,6 +142,7 @@ useEffect(()=>{
               <i className="fa fa-pause fa-2x"/>
             </button>
            <button className='reset-btn' onClick={handleResetClick}><i className="fa fa-refresh fa-2x"></i></button>
+           <audio ref={beep} id="beep" preload="auto" src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"></audio>
           </div>
         </div>
       </div>
