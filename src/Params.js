@@ -1,6 +1,7 @@
 
-function Params({id, label, counter, updateCounter, intervalId}){
+function Params({id, label, counter, updateCounter, intervalId, playState}){
     function handleClick(event){
+        if(!playState){ 
         clearInterval(intervalId)
         if(event.currentTarget.id === `${id}-decrement`  && counter >1) {
             if(id === 'session'){
@@ -20,7 +21,6 @@ function Params({id, label, counter, updateCounter, intervalId}){
         }
         if(event.currentTarget.id === `${id}-increment` && counter <60){
             if(id === 'session'){
-                clearInterval(intervalId)
                 updateCounter(prev=> ({
                     ...prev,
                     sessionLength: prev.sessionLength +1
@@ -33,6 +33,7 @@ function Params({id, label, counter, updateCounter, intervalId}){
                 }))
             }
         }
+    }
     }
     return(
         <div className="params-container">
