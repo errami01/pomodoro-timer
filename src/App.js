@@ -128,14 +128,16 @@ useEffect(()=>{
           playState={timer.play}
           />
       </div>
-      <div className='timer-container'>
-        <h4 id='timer-label' className='timer-label'>
+      <div className='timer-container-div'>
+        <h4 id='timer-label' className='timer-label-h2'>
           {timer.turn==="session"? "Session":'Break'}
         </h4>
-        <div id="time-left">
+        <div id="time-left" className='time-left'>
           <span className='minutes' ref={minutesElement}>{displayedTimer}</span>
           :
           <span className='seconds' ref={secElement}>{'00'}</span>
+        </div>
+        </div>
           <div className='controle-panel'>
            <button className='play-pause' onClick={handlePlayPauseClick}>
               <i className="fa fa-play fa-2x"></i>
@@ -144,8 +146,8 @@ useEffect(()=>{
            <button className='reset-btn' onClick={handleResetClick}><i className="fa fa-refresh fa-2x"></i></button>
            <audio ref={beep} id="beep" preload="auto" src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"></audio>
           </div>
-        </div>
-      </div>
+        
+      
       
     </div>
   );
